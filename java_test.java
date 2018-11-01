@@ -8,9 +8,17 @@ public class java_test {
 		//thing.testArrayList();
 		//thing.testObject();
 		thing.testAnimal();
+		
+		
 	}
 }
 
+//接口: 实现了继承一个以上的类(某类还可以扮演某个类)
+interface Pet {
+	// public abstract可以省略, 默认就是public abstract
+	public abstract void play();
+	void beFriendly();
+}
 //类名要大写开头/其他名字骆驼峰
 //abstract:抽象类
 abstract class Animal {
@@ -36,6 +44,9 @@ abstract class Animal {
 		}
 	// abstract : 抽象方法, 等着被覆盖(不能重载!!!)
 	abstract public void makeNoise();
+	public void testOverWrite() {
+		System.out.println("Animal's method");
+	}
 }
 
 // x继承自y : x extends y  (public继承private不继承)
@@ -44,6 +55,12 @@ class Dog extends Animal {
 	//覆盖(必须履行覆盖规则--返回值类型和参数个数必须一致): 直接重写
 	public void makeNoise() {
 		System.out.println("wang wang wang!!!");
+	}
+	public void sayFuck() {
+		System.out.println("fuck");
+	}
+	public void testOverWrite() {
+		System.out.println("Dog's method");
 	}
 }
 
@@ -58,6 +75,18 @@ class Cat extends Animal {
 	//覆盖(必须履行覆盖规则--返回值类型和参数个数必须一致): 直接重写
 	public void makeNoise() {
 		System.out.println("miao miao miao!!!");
+	}
+}
+
+class Hippo extends Animal implements Pet {
+	public void makeNoise() {
+		System.out.println("I am making noise...");
+	}
+	public void play() {
+		System.out.println("I am playing");
+	}
+	public void beFriendly() {
+		System.out.println("I am friendly");
 	}
 }
 
@@ -78,6 +107,24 @@ class TestSomething{
 		for (Animal animal:animalVector) {
 			animal.makeNoise();
 		}
+		
+		//编译器只根据引用类型来判断有哪些method可以用, 而不是对象类型
+		//Animal dog = new Dog();
+		//dog.sayFuck();
+		//Dog trueDog = new Dog();
+		//trueDog.sayFuck();
+		
+		//父类声明过的可以使用/也可以被覆盖
+		//Animal dog = new Dog();
+		//dog.testOverWrite();
+		
+		//转换成Dog, 拷贝一个Dog引用, 就可以使用了
+		//用instanceof来检查引用的对象是不是Dog
+//		Animal dog = new Dog();
+//		if (dog instanceof Dog) {
+//			Dog copyDog = (Dog) dog;
+//			copyDog.sayFuck();
+//		}
 	}
 	public void testRandom() {
 		// 产生0~n之内的随机数 :Math.random() * n
